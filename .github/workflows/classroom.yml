@@ -13,49 +13,48 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.9'
-    
-    - name: Create virtual environment
-      run: python -m venv venv
-
-    - name: 'Test HTML'
-      id: test-html
+    - name: Test HTML Proficiency
+      id: test-html-proficiency
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: 'Test HTML'
-        setup-command: . ./venv/bin/activate && pip install -r requirements.txt
-        command: . ./venv/bin/activate && pytest tests/test_html.py
+        test-name: Test HTML Proficiency
+        setup-command: pip install webcode-tk file-clerk pytest
+        command: pytest tests/test_html_requirements.py
         timeout: 10
-        max-score: 3
-
-    - name: 'Test CSS'
-      id: test-css
+        max-score: 1
+    - name: Test CSS Proficiency
+      id: test-css-proficiency
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: 'Test CSS'
-        setup-command: . ./venv/bin/activate && pip install -r requirements.txt
-        command: . ./venv/bin/activate && pytest tests/test_css.py
+        test-name: Test CSS Proficiency
+        setup-command: pip install webcode-tk file-clerk pytest
+        command: pytest tests/test_css_requirements.py
         timeout: 10
-        max-score: 3
-
-    - name: 'Test Exceeds'
+        max-score: 1
+    - name: Test Validity
+      id: test-validity
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test Validity
+        setup-command: pip install webcode-tk file-clerk pytest
+        command: pytest tests/test_validity.py -W default -v
+        timeout: 10
+        max-score: 1
+    - name: Test Exceeds
       id: test-exceeds
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: 'Test Exceeds'
-        setup-command: . ./venv/bin/activate && pip install -r requirements.txt
-        command: . ./venv/bin/activate && pytest tests/test_exceeds.py
+        test-name: Test Exceeds
+        setup-command: pip install webcode-tk file-clerk pytest
+        command: pytest tests/test_exceeds_requirements.py
         timeout: 10
-        max-score: 2
-
+        max-score: 1
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        TEST-HTML_RESULTS: "${{steps.test-html.outputs.result}}"
-        TEST-CSS_RESULTS: "${{steps.test-css.outputs.result}}"
+        TEST-HTML-PROFICIENCY_RESULTS: "${{steps.test-html-proficiency.outputs.result}}"
+        TEST-CSS-PROFICIENCY_RESULTS: "${{steps.test-css-proficiency.outputs.result}}"
+        TEST-VALIDITY_RESULTS: "${{steps.test-validity.outputs.result}}"
+        TEST-EXCEEDS_RESULTS: "${{steps.test-exceeds.outputs.result}}"
       with:
-        runners: test-html,test-css
+        runners: test-html-proficiency,test-css-proficiency,test-validity,test-exceeds
