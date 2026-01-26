@@ -136,6 +136,19 @@ nav li a:visited {
     color: #A26769; 
 }
 
+/* LOGO */
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    height: 42px;
+    width: auto;
+    background: none;
+    padding: 0;
+}
+
 /* Sections & Cards */
 section, aside, article {
     margin-top: 1.2rem;
@@ -282,7 +295,7 @@ button:focus {
 .nav {
     position: absolute;
     top: 1rem;
-    right: 1rem;
+    right: 1.5rem;
     z-index: 100;
 }
 
