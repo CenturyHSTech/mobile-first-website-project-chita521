@@ -24,7 +24,8 @@ footer {
 
 /* Images */
 img {
-    max-width: 500px;
+    width: 500px;
+    max-width: 100%;
     height: auto;
     padding: 10px;
     background-color: #A26769;
@@ -93,10 +94,13 @@ hgroup p {
 
 /* NAVIGATION */
 nav {
-    position: absolute;
-    top: 1.125rem;
-    right: 1.5rem;
-    z-index: 50;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4.5em auto 3.5em;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "logo . toggle"
+        "navbar navbar navbar";
     padding: 0.5rem 0;
 }
 
@@ -140,6 +144,7 @@ nav li a:visited {
 .logo{
     display: flex;
     align-items: center;
+    grid-area: logo;
 }
 
 .logo img{
@@ -292,12 +297,12 @@ button:focus {
 }
 
 /* MOBILE-FIRST NAVIGATION */
-.nav {
+/*.nav {
     position: absolute;
     top: 1rem;
     right: 1.5rem;
     z-index: 100;
-}
+}*/
 
 /* Hamburger Button */
 .nav-toggle {
@@ -307,6 +312,8 @@ button:focus {
     cursor: pointer;
     color: #6D2E46;
     padding: 0.4rem 0.6rem;
+    grid-area: toggle;
+    justify-self: end;
 }
 
 /* Hide menu by default (mobile) */
@@ -317,6 +324,8 @@ button:focus {
     border-radius: 12px;
     margin-top: 0.5rem;
     padding: 0.5rem;
+    width: max-content;
+    margin-left: auto;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
@@ -326,6 +335,8 @@ button:focus {
         opacity 0.35s ease,
         transform 0.4s ease;
     box-shadow: 0 12px 30px rgba(109,46,70,0.18);
+    grid-area: navbar;
+    justify-self: end;
 }
 
 .nav-menu.active {
@@ -337,6 +348,8 @@ button:focus {
 .nav-menu li {
     list-style: none;
     margin: 0.25rem 0;
+    width: 100%;
+    text-align: center;
 }
 
 .nav-menu a {
@@ -347,6 +360,12 @@ button:focus {
 
 /* DESKTOP NAVIGATION */
 @media (min-width: 768px) {
+    nav{
+        grid-template-columns: auto 1fr;
+        grid-template-areas: "logo navbar";
+        align-items: center;
+    }
+    
     .nav-toggle {
         display: none;
     }
@@ -362,6 +381,7 @@ button:focus {
         max-height: none;
         opacity: 1;
         transform: none;
+        justify-self: end;
     }
 }
 /* IMAGE + TEXT SIDE-BY-SIDE (NON-INDEX PAGES) */
