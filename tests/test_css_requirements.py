@@ -11,7 +11,8 @@ from webcode_tk import html_tools as html
 project_path = "project/"
 html_files = html.get_all_html_files(project_path)
 styles_by_html_files = css.get_styles_by_html_files(project_path)
-color_contrast_results = contrast.generate_contrast_report(project_path)
+color_contrast_results = []
+color_contrast_results = css.get_project_color_contrast_report(project_path)
 no_style_attribute_tests = []
 REQUIRED_ELEMENTS = (
     "header",
@@ -137,7 +138,6 @@ def get_html_elements_required_and_used(project_path, required_properties):
             if number:
                 required_and_used.add(element)
     return required_and_used
-
 
 
 def prep_properties_applied_report(project_path, required_properties,
