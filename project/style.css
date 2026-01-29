@@ -348,7 +348,6 @@ button:focus {
 .nav-menu li {
     list-style: none;
     margin: 0.25rem 0;
-    width: 100%;
     text-align: center;
 }
 
@@ -356,6 +355,7 @@ button:focus {
     display: block;
     padding: 0.6rem 1rem;
     font-weight: 700;
+    width: 10em; 
 }
 
 /* DESKTOP NAVIGATION */
